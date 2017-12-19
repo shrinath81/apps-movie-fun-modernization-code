@@ -6,12 +6,20 @@ applications:
   path: applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
   services:
   - album-database
+  - movie-fun-sso
+  env:
+    GRANT_TYPE: client_credentials
 - name: movie-service
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
   services:
   - movie-database
+  - movie-fun-sso
+  env:
+    GRANT_TYPE: client_credentials
 - name: movie-fun-app
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
+  services:
+  - movie-fun-sso
   env:
-    ALBUMS_URL: http://album-service.cfapps-02.haas-66.pez.pivotal.io/albums
-    MOVIES_URL: http://movie-service.cfapps-02.haas-66.pez.pivotal.io/movies
+    ALBUMS_URL: http://album-service-shrinath.apps.cumuluslabs.io/albums
+    MOVIES_URL: http://movie-service-shrinath.apps.cumuluslabs.io/movies
