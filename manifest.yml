@@ -4,18 +4,32 @@ instances: 1
 services:
 - movie-fun-sso
 - movie-fun-registry
+env:
+  S3_ENDPOINTURL: http://s3.amazonaws.com
+  S3_ACCESSKEY: AKIAIYCO2YLAA7IPMAOQ
+  S3_SECRETKEY: 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
+  S3_BUCKETNAME: cf-3961f414-5b01-48bd-93a8-3f7cb00bb2a3
+
 applications:
 - name: album-service
+  routes:
+  - route: album-service-shrinath.apps.cumuluslabs.io
   path: applications/album-service/build/libs/album-service-1.1.0-SNAPSHOT.jar
   services:
   - album-database
   env:
     GRANT_TYPE: client_credentials
 - name: movie-service
+  routes:
+  - route: movie-service-shrinath.apps.cumuluslabs.io
   path: applications/movie-service/build/libs/movie-service-1.1.0-SNAPSHOT.jar
   services:
   - movie-database
   env:
     GRANT_TYPE: client_credentials
 - name: movie-fun-app
+  routes:
+  - route: movie-fun-app-shrinath.apps.cumuluslabs.io
   path: applications/movie-fun-app/build/libs/movie-fun-app-1.1.0-SNAPSHOT.war
+  services:
+  - movie-fun-config
